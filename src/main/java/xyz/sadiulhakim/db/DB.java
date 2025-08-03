@@ -8,13 +8,19 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DB {
-    private DB() {
-    }
 
     private static final HikariDataSource DS = new HikariDataSource();
 
+    private DB() {
+    }
+
+    public static DB getInstance() {
+        return new DB();
+    }
+
     static {
-        ConnectionDetails connectionDetails = ApplicationPropertiesReader.getConnectionDetails();
+        ApplicationPropertiesReader reader = ApplicationPropertiesReader.getInstance();
+        ConnectionDetails connectionDetails = reader.getConnectionDetails();
         DS.setJdbcUrl(connectionDetails.url());
         DS.setUsername(connectionDetails.username());
         DS.setPassword(connectionDetails.password());
@@ -27,11 +33,11 @@ public class DB {
         DS.addDataSourceProperty("useServerPrepStmts", "true"); // Enables server-side statement caching
     }
 
-    public static Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         return DS.getConnection();
     }
 
-    public static void shutdown() {
+    public void shutdown() {
         DS.close();
     }
 }
