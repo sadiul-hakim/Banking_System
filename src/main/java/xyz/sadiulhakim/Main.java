@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         // Shutdown hook
-        Runtime.getRuntime().addShutdownHook(Thread.ofPlatform().name("#CleanupJunks-", 0).start(() -> {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Closing HikariCP pool and data sources......");
             DB.getInstance().shutdown();
         }));

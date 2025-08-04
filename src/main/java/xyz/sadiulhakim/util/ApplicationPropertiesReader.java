@@ -11,6 +11,7 @@ public class ApplicationPropertiesReader {
     public static final String DATABASE_USERNAME = "database.username";
     public static final String DATABASE_PASSWORD = "database.password";
     public static final String DATABASE_INIT_SCHEMA = "database.init.schema";
+    public static final String DATABASE_CONNECTION_POOL_SIZE = "database.connection.pool.size";
     private ConnectionDetails connectionDetails;
 
     private ApplicationPropertiesReader() {
