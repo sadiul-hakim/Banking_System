@@ -23,7 +23,7 @@ class DBInitializer implements Observer {
     public void update(Event event) {
         ApplicationPropertiesReader reader = ApplicationPropertiesReader.getInstance();
         Boolean init = reader.getPropertyValueOfType(ApplicationPropertiesReader.DATABASE_INIT_SCHEMA, Boolean.class);
-        if (!init) {
+        if (init == null || !init) {
             return;
         }
 

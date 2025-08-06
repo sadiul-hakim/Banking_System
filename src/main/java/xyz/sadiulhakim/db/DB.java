@@ -24,8 +24,9 @@ public class DB {
         DS.setJdbcUrl(connectionDetails.url());
         DS.setUsername(connectionDetails.username());
         DS.setPassword(connectionDetails.password());
+        Integer poolSize = reader.getPropertyValueOfType(ApplicationPropertiesReader.DATABASE_CONNECTION_POOL_SIZE, Integer.class);
         DS.setMaximumPoolSize(
-                reader.getPropertyValueOfType(ApplicationPropertiesReader.DATABASE_CONNECTION_POOL_SIZE, Integer.class)
+                poolSize != null ? poolSize : 10
         );
 
         // Optional performance tuning
